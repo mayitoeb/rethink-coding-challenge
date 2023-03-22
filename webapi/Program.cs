@@ -5,7 +5,20 @@ using webapi.Infrastructure.Data.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddCors();
+// Default Policy
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy(name: "AllowAnyOrigin",
+//        builder =>
+//        {
+//            builder.AllowAnyOrigin()
+//                    .AllowAnyHeader()
+//                    .AllowAnyMethod();
+//        });
+//});
+
 builder.Services.AddControllers();
 builder.Services.AddSingleton(_ => new DbConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
@@ -24,7 +37,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(policy => policy.AllowAnyOrigin());
+app.UseCors(policy => policy
+.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader());
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
