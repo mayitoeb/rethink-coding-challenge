@@ -8,9 +8,9 @@ namespace webapi.Controllers
     [ApiController]
     public class PatientsController : ControllerBase
     {
-        private readonly IPatientReadRepository _repository;
+        private readonly IPatientRepository _repository;
 
-        public PatientsController(IPatientReadRepository repository)
+        public PatientsController(IPatientRepository repository)
         {
             _repository = repository;
         }
@@ -20,6 +20,13 @@ namespace webapi.Controllers
         {
             var data = await _repository.GetAllAsync();
             return Ok(data);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Patient>> PutAsync([FromBody] Patient patient)
+        {
+            await _repository.UpdateAsync(patient);
+            return Ok();
         }
     }
 }
