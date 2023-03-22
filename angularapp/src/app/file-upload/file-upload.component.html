@@ -1,11 +1,11 @@
 
 <p-toast></p-toast>
 
-<h3>Upload File</h3>
-<p-fileUpload name="myfile[]" url="https://localhost:7211/file-upload" (onUpload)="onUpload($event)" accept=".csv">
-  <ng-template pTemplate="content">
-    <ul *ngIf="uploadedFiles.length">
-      <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-    </ul>
-  </ng-template>
-</p-fileUpload>
+<p-panel header="Upload File">
+  <p-fileUpload name="myfile[]" url="https://localhost:7211/file-upload" (onUpload)="onUpload($event)" accept=".csv">
+    <ng-template pTemplate="content">
+      <p *ngIf="uploadedFile"> {{uploadedFile.name}} - {{uploadedFile.size}} bytes</p>
+    </ng-template>
+  </p-fileUpload>
+</p-panel>
+
