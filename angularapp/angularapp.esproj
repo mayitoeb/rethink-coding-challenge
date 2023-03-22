@@ -12,5 +12,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\file-upload\" />
+    <Folder Include="src\app\shared\" />
   </ItemGroup>
 </Project>

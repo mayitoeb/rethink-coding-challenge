@@ -1,6 +1,6 @@
 <h2>Demo</h2>
 
-<file-upload></file-upload>
+<file-upload (uploadedFileEvent)="patientList.getPatients()"></file-upload>
 <br />
 <br />
-<patient-list></patient-list>
+<patient-list #patientList></patient-list>
