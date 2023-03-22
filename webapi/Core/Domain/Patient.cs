@@ -4,6 +4,7 @@ namespace webapi.Core.Domain
 {
     public class Patient
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public DateTime Birthday { get; set; }
