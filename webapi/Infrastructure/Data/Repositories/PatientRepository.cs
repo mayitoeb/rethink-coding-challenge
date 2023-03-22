@@ -13,6 +13,16 @@ namespace webapi.Infrastructure.Data.Repositories
             _dbConnection = dbConnection;
         }
 
+        public async Task<IEnumerable<Patient>> GetAllAsync()
+        {
+            const string query = "SELECT Id, FirstName, LastName, Birthday, Gender FROM Patients";
+
+            using var connection = _dbConnection.Open();
+            var data = await connection.QueryAsync<Patient>(query);
+
+            return data;
+        }
+
         public async Task AddAsync(IEnumerable<Patient> patients)
         {
             // For demo purposes.
@@ -22,6 +32,14 @@ namespace webapi.Infrastructure.Data.Repositories
 
             using var connection = _dbConnection.Open();
             var rowsAffected = await connection.ExecuteAsync(query, patients);
+        }
+
+        public async Task UpdateAsync(Patient patient)
+        {
+            const string query = "UPDATE Patients SET FirstName = @FirstName, LastName = @LastName, Birthday = @Birthday, Gender = @Gender WHERE Id = @Id;";
+
+            using var connection = _dbConnection.Open();
+            var rowsAffected = await connection.ExecuteAsync(query, new { patient.Id, patient.FirstName, patient.LastName, patient.Birthday, patient.Gender });
         }
 
         private async Task ClearDatabase()
