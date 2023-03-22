@@ -9,6 +9,7 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
+import { PanelModule } from 'primeng/panel';
 
 import { AppComponent } from './app.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -28,7 +29,8 @@ import { PatientListComponent } from './patients/patient-list/patients-list.comp
     TableModule,
     FileUploadModule,
     ToastModule,
-    CardModule
+    CardModule,
+    PanelModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
