@@ -30,9 +30,12 @@ export class PatientListComponent implements OnInit {
 
   getPatients(): void {
     this.patientService.getAll()
-      .subscribe(data => {
-        this.patients = data;
-        this.loading = false;
+      .subscribe({
+        next: (data) => {
+          this.patients = data;
+          this.loading = false;
+        },
+        error: (e) => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'There was an error getting the patients.' })
       });
   }
 
@@ -43,8 +46,9 @@ export class PatientListComponent implements OnInit {
 
   onRowEditSave(patient: Patient) {
     this.patientService.update(patient)
-      .subscribe(() => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Patient is updated' });
+      .subscribe({
+        next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Patient is updated' }),
+        error: (e) => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'There was an error updating the patient.' })
       });
   }
 
