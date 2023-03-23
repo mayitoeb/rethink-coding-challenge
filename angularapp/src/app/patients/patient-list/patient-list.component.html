@@ -1,12 +1,15 @@
 
+<p-toast></p-toast>
+
 <p-panel header="Patient List">
-  <p-table [value]="patients" [tableStyle]="{'min-width': '50rem'}" [loading]="loading">
+  <p-table [value]="patients" [tableStyle]="{'min-width': '50rem'}" [loading]="loading" dataKey="id" editMode="row">
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="firstName">First Name <p-sortIcon field="firstName"></p-sortIcon></th>
-        <th pSortableColumn="lastName">Last Name <p-sortIcon field="lastName"></p-sortIcon></th>
-        <th pSortableColumn="birthday" >Birthday <p-sortIcon field="birthday"></p-sortIcon></th>
-        <th pSortableColumn="gender">Gender <p-sortIcon field="gender"></p-sortIcon></th>
+        <th pSortableColumn="firstName" style="width:20%">First Name <p-sortIcon field="firstName"></p-sortIcon></th>
+        <th pSortableColumn="lastName" style="width:20%">Last Name <p-sortIcon field="lastName"></p-sortIcon></th>
+        <th style="width:20%">Birthday</th>
+        <th style="width:20%">Gender</th>
+        <th style="width:20%"></th>
       </tr>
       <tr>
         <th>
@@ -19,14 +22,63 @@
         </th>
         <th>
         </th>
+        <th>
+        </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-patient>
-      <tr>
-        <td>{{patient.firstName}}</td>
-        <td>{{patient.lastName}}</td>
-        <td>{{patient.birthday | date:'shortDate'}}</td>
-        <td>{{patient.gender}}</td>
+    <ng-template pTemplate="body" let-patient let-editing="editing" let-ri="rowIndex">
+      <tr tr [pEditableRow]="patient">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="patient.firstName">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{patient.firstName}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="patient.lastName">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{patient.lastName}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+            <p-calendar [(ngModel)]="patient.birthday" appendTo="body"></p-calendar>
+              </ng-template>
+            <ng-template pTemplate="output">
+              {{patient.birthday | date:'dd/MM/yyyy'}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-dropdown [options]="genders" [(ngModel)]="patient.gender"></p-dropdown>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{patient.gender}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(patient)" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(patient)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(patient, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+          </div>
+        </td>
       </tr>
     </ng-template>
   </p-table>
