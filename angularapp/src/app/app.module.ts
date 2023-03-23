@@ -15,6 +15,7 @@ import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { AppComponent } from './app.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -39,7 +40,8 @@ import { PatientListComponent } from './patients/patient-list/patients-list.comp
     PanelModule,
     InputTextModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    InputMaskModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
