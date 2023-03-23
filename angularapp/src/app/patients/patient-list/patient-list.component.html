@@ -1,7 +1,7 @@
 
 <p-toast></p-toast>
 
-<p-panel header="Patient List">
+<p-card header="Patient List">
   <p-table [value]="patients" [tableStyle]="{'min-width': '50rem'}" [loading]="loading" dataKey="id" editMode="row">
     <ng-template pTemplate="header">
       <tr>
@@ -53,8 +53,8 @@
         <td>
           <p-cellEditor>
             <ng-template pTemplate="input">
-            <p-calendar [(ngModel)]="patient.birthday" appendTo="body"></p-calendar>
-              </ng-template>
+              <p-calendar [(ngModel)]="patient.birthday" appendTo="body"></p-calendar>
+            </ng-template>
             <ng-template pTemplate="output">
               {{patient.birthday | date:'dd/MM/yyyy'}}
             </ng-template>
@@ -82,5 +82,4 @@
       </tr>
     </ng-template>
   </p-table>
-</p-panel>
-
+</p-card>
