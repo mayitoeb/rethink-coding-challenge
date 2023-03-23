@@ -37,7 +37,7 @@ export class PatientListComponent implements OnInit {
   }
 
   onRowEditInit(patient: Patient) {
-    //patient.birthday = new Date(patient.birthday)
+    patient.birthday = new Date(patient.birthday)
     this.clonedPatients[patient.id] = { ...patient };
   }
 
