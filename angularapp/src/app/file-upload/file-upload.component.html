@@ -1,10 +1,12 @@
 
 <p-toast></p-toast>
 
-<p-card header="Upload File">
+<p-card header="Upload File" subheader="Database will be clear every time a csv is uploaded.">
   <p-fileUpload name="myfile[]" url="https://localhost:7211/file-upload" (onUpload)="onUpload($event)" accept=".csv">
     <ng-template pTemplate="content">
       <p *ngIf="uploadedFile"> {{uploadedFile.name}} - {{uploadedFile.size}} bytes</p>
     </ng-template>
   </p-fileUpload>
 </p-card>
+
+
