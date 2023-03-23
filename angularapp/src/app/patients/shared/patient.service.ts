@@ -21,24 +21,13 @@ export class PatientService {
   getAll(): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.patientsUrl)
       .pipe(
-        tap(_ => this.log('fetched patients')),
-        catchError(this.handleError())
+        tap(_ => console.log('fetched patients'))
       );
   }
 
   update(patient: Patient): Observable<any> {
     return this.http.put(this.patientsUrl, patient, this.httpOptions).pipe(
-      tap(_ => this.log(`updated patient id=${patient.id}`)),
-      catchError(this.handleError())
+      tap(_ => console.log(`updated patient id=${patient.id}`))
     );
   }
-
-  private handleError(): any {
-    //this.messageService.add({ severity: 'success', summary: 'File Uploaded', detail: '' });
-  };
-
-  private log(message: string) {
-    //this.messageService.add(`PatientService: ${message}`);
-  }
-
 }
