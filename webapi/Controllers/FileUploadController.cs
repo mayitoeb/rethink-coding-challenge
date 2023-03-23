@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Globalization;
 using webapi.Core.Domain;
 using webapi.Core.Interfaces;
@@ -11,10 +12,13 @@ namespace webapi.Controllers
     public class FileUploadController : ControllerBase
     {
         const string permittedExtension = ".csv";
+        private readonly ILogger _logger;
         private readonly IPatientRepository _repository;
+        
 
-        public FileUploadController(IPatientRepository repository)
+        public FileUploadController(ILogger<FileUploadController> logger, IPatientRepository repository)
         {
+            _logger = logger;
             _repository = repository;
         }
 
@@ -51,7 +55,8 @@ namespace webapi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "There was a problem uploading the file.");
+                _logger.LogError(ex, "Error uploading file.");
+                return StatusCode(500, "There was an error uploading the file.");
             }
         }
     }
