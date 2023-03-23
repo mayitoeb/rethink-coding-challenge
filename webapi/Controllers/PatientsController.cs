@@ -25,8 +25,15 @@ namespace webapi.Controllers
         [HttpPut]
         public async Task<ActionResult<Patient>> PutAsync([FromBody] Patient patient)
         {
-            await _repository.UpdateAsync(patient);
-            return Ok();
+            try
+            {
+                await _repository.UpdateAsync(patient);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                throw;
+            }  
         }
     }
 }
