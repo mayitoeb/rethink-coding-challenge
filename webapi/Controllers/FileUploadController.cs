@@ -28,16 +28,16 @@ namespace webapi.Controllers
             {
                 var form = Request.Form;
 
-                if (form == null)
+                if (form == null || form.Files.Count == 0)
                 {
                     return BadRequest("File not uploaded.");
                 }
 
                 var file = form.Files[0];
 
-                if (file == null || !file.FileName.Contains(permittedExtension))
+                if (!file.FileName.Contains(permittedExtension))
                 {
-                    return BadRequest("File not uploaded.");
+                    return BadRequest("Extension is not valid.");
                 }
 
                 using (var stream = file.OpenReadStream())
@@ -51,6 +51,11 @@ namespace webapi.Controllers
                 };
 
                 return Ok();
+            }
+            catch (CsvHelperException ex)
+            {
+                _logger.LogError(ex, "Wrong Csv format.");
+                return BadRequest("Csv is not formatted properly.");
             }
             catch (Exception ex)
             {
