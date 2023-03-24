@@ -14,6 +14,12 @@ namespace webapi.Core.Handlers
             _repository = repository;
         }
 
+        /// <summary>
+        /// Bussiness logic goes here
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Patient>> Handle(GetAllPatientsQuery request, CancellationToken cancellationToken)
         {
             var data = await _repository.GetAllAsync();
