@@ -1,6 +1,5 @@
 ﻿using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Globalization;
 using webapi.Core.Domain;
 using webapi.Core.Interfaces;
