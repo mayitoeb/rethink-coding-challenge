@@ -35,7 +35,6 @@ namespace webapi.Controllers
                 _logger.LogError(ex, "Error getting the patients.");
                 return StatusCode(500, "There was an error getting the patients.");
             }
-          
         }
 
         [HttpPut]
