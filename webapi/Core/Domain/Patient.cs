@@ -4,11 +4,25 @@ namespace webapi.Core.Domain
 {
     public class Patient
     {
-        public Guid Id { get; set; }
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public DateTime Birthday { get; set; }
-        public char Gender { get; set; }
+        public Guid Id { get; private set; }
+        public string FirstName { get; private set; } = string.Empty;
+        public string LastName { get; private set; } = string.Empty;
+        public DateTime Birthday { get; private set; }
+        public char Gender { get; private set; }
+
+        public Patient()
+        {
+            
+        }
+
+        public Patient(Guid id,  string firstName, string lastName, DateTime birthday, char gender)
+        {
+            Id = id;
+            FirstName = firstName ?? string.Empty;
+            LastName = lastName ?? string.Empty;
+            Birthday = birthday;
+            Gender = gender;
+        }
     }
 
     public class PatientMap : ClassMap<Patient>
