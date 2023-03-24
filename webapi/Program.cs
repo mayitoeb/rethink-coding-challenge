@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using webapi.Core.Extensions;
 using webapi.Core.Interfaces;
 using webapi.Infrastructure.Data.DbConnection;
@@ -11,6 +13,8 @@ builder.Services.ConfigureCors(corsPolicy);
 builder.Services.AddControllers();
 builder.Services.AddSingleton(_ => new DbConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
