@@ -31,14 +31,14 @@ namespace webapi.Controllers
 
                 if (form == null)
                 {
-                    return BadRequest();
+                    return BadRequest("File not uploaded.");
                 }
 
                 var file = form.Files[0];
 
                 if (file == null || !file.FileName.Contains(permittedExtension))
                 {
-                    return BadRequest();
+                    return BadRequest("File not uploaded.");
                 }
 
                 using (var stream = file.OpenReadStream())

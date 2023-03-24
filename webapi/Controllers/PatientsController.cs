@@ -48,7 +48,7 @@ namespace webapi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating patient {patient}.", command);
+                _logger.LogError(ex, "Error updating patient {command}.", command);
                 return StatusCode(500, "There was an error updating the patient.");
             }  
         }

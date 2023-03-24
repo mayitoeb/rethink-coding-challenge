@@ -14,6 +14,12 @@ namespace webapi.Core.Handlers
             _repository = repository;
         }
 
+        /// <summary>
+        /// Bussiness logic goes here
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<Unit> Handle(UpdatePatientCommand request, CancellationToken cancellationToken)
         {
             var patient = new Patient(request.Id, request.FirstName, request.LastName, request.Birthday, request.Gender);
