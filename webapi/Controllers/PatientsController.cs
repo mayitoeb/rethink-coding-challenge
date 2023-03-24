@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using webapi.Core.Commands;
 using webapi.Core.Domain;
 using webapi.Core.Interfaces;
+using webapi.Core.Queries;
 
 namespace webapi.Controllers
 {
@@ -26,7 +27,7 @@ namespace webapi.Controllers
         {
             try
             {
-                var data = await _repository.GetAllAsync();
+                var data = await _mediator.Send(new GetAllPatientsQuery());
                 return Ok(data);
             }
             catch (Exception ex)
