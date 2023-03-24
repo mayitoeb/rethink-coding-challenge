@@ -1,12 +1,14 @@
+using webapi.Core.Extensions;
 using webapi.Core.Interfaces;
 using webapi.Infrastructure.Data.DbConnection;
 using webapi.Infrastructure.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+var corsPolicy = "CorsPolicy";
 
 // Add services to the container.
+builder.Services.ConfigureCors(corsPolicy);
 
-builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSingleton(_ => new DbConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
@@ -24,10 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(policy => policy
-.AllowAnyOrigin()
-.AllowAnyMethod()
-.AllowAnyHeader());
+app.UseCors(corsPolicy);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
