@@ -8,14 +8,14 @@ namespace webapi.Core.Domain
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public DateTime Birthday { get;  set; }
-        public char Gender { get; set; }
+        public string Gender { get; set; }
 
         public Patient()
         {
             
         }
 
-        public Patient(Guid id,  string firstName, string lastName, DateTime birthday, char gender)
+        public Patient(Guid id,  string firstName, string lastName, DateTime birthday, string gender)
         {
             Id = id;
             FirstName = firstName ?? string.Empty;
