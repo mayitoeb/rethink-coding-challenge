@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
@@ -44,11 +45,19 @@ export class PatientListComponent implements OnInit {
     this.clonedPatients[patient.id] = { ...patient };
   }
 
-  onRowEditSave(patient: Patient) {
+  onRowEditSave(patient: Patient, index: number) {
     this.patientService.update(patient)
       .subscribe({
         next: () => this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Patient is updated' }),
-        error: (e) => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'There was an error updating the patient.' })
+        error: (e) => {
+          if (e.status == 400) {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Patient is not valid.' })
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'There was an error updating the patient.' })
+          }
+
+          this.patients[index] = this.clonedPatients[patient.id];
+        }
       });
   }
 
