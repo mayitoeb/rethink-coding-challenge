@@ -4,11 +4,11 @@ namespace webapi.Core.Domain
 {
     public class Patient
     {
-        public Guid Id { get; private set; }
-        public string FirstName { get; private set; } = string.Empty;
-        public string LastName { get; private set; } = string.Empty;
-        public DateTime Birthday { get; private set; }
-        public char Gender { get; private set; }
+        public Guid Id { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public DateTime Birthday { get;  set; }
+        public char Gender { get; set; }
 
         public Patient()
         {
