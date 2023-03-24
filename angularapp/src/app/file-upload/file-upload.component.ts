@@ -20,6 +20,7 @@ export class FileUploadComponent {
   }
 
   onError(event: any) {
+    this.uploadedFile = null;
     this.messageService.add({ severity: 'error', summary: 'Error uploading the file.', detail: '' });
   }
 
